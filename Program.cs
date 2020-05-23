@@ -69,18 +69,14 @@ namespace FirstBankOfSuncoast
 
             if (File.Exists("transactions.csv"))
             {
-                // This object knows how to read characters from a file
+
                 var reader = new StreamReader("transactions.csv");
 
-                // And we give that file reading object to the CSV reading object
-                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-                // And tell it we have no headers
-                csvReader.Configuration.HasHeaderRecord = false;
 
-                // Ask the csv reading object to get records that are `int`
-                // and give them back to us as a List.
+                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+
                 checkingAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
-                savingsAccount.Transactions = csvReader.GetRecord<Transaction>().ToList();
+                savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
             }
 
             var userHasQuitApp = false;
@@ -97,45 +93,52 @@ namespace FirstBankOfSuncoast
 
                 var choice = PromptForString("Choice: ");
 
-                if (choice == "D")
-                    Console.WriteLine("What account would you like to deposit funds into? (C)hecking or (S)avings account.");
-                var choiceOfAccount = PromptForString("Choice: ");
-
-                if (choiceOfAccount == "C")
+                if (choice == "Q")
                 {
-                    var newId = Guid.NewGuid();
-                    var newAccountId = 1;
-                    var newAmount = PromptForDecimal("How much would you like to deposit? ");
-                    var newDate = DateTime.Now;
-                    var newTransaction = new Transaction
-
-                    {
-                        Id = newId,
-                        AccountId = newAccountId,
-                        Amount = newAmount,
-                        TransactionDate = newDate,
-                    };
-                    checkingAccount.Transactions.Add(newTransaction);
-                    Console.WriteLine($"You have deposited {newAmount} into your checking account.");
-
+                    userHasQuitApp = true;
                 }
 
-                if (choiceOfAccount == "S")
+                if (choice == "D")
                 {
-                    var newId = Guid.NewGuid();
-                    var newAccountId = 2;
-                    var newAmount = PromptForDecimal("How much would you like to deposit? ");
-                    var newDate = DateTime.Now;
-                    var newTransaction = new Transaction
-                    {
-                        Id = newId,
-                        AccountId = newAccountId,
-                        Amount = newAmount,
-                        TransactionDate = newDate,
-                    };
-                    savingsAccount.Transactions.Add(newTransaction);
-                    Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+                    Console.WriteLine("What account would you like to deposit funds into? (C)hecking or (S)avings account.");
+                    var choiceOfAccount = PromptForString("Choice: ");
 
+                    if (choiceOfAccount == "C")
+                    {
+                        var newId = Guid.NewGuid();
+                        var newAccountId = 1;
+                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                        var newDate = DateTime.Now;
+                        var newTransaction = new Transaction
+
+                        {
+                            Id = newId,
+                            AccountId = newAccountId,
+                            Amount = newAmount,
+                            TransactionDate = newDate,
+                        };
+                        checkingAccount.Transactions.Add(newTransaction);
+                        Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+
+                    }
+
+                    if (choiceOfAccount == "S")
+                    {
+                        var newId = Guid.NewGuid();
+                        var newAccountId = 2;
+                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                        var newDate = DateTime.Now;
+                        var newTransaction = new Transaction
+                        {
+                            Id = newId,
+                            AccountId = newAccountId,
+                            Amount = newAmount,
+                            TransactionDate = newDate,
+                        };
+                        savingsAccount.Transactions.Add(newTransaction);
+                        Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+
+                    }
                 }
 
             }
