@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace FirstBankOfSuncoast
 {
     class Program
@@ -66,13 +67,54 @@ namespace FirstBankOfSuncoast
 
             while (userHasQuitApp == false)
             {
+                Console.WriteLine();
                 Console.WriteLine("Welcome to First Bank of Suncoast! Please choose an option.");
                 Console.WriteLine("(V)iew account balances");
                 Console.WriteLine("(D)eposit funds into checking or savings accounts");
                 Console.WriteLine("(W)ithdraw funds from checking or savings accounts");
                 Console.WriteLine("(Q)uit the application");
+                Console.WriteLine();
 
                 var choice = PromptForString("Choice: ");
+
+                if (choice == "D")
+                    Console.WriteLine("What account would you like to deposit funds into? (C)hecking or (S)avings account.");
+                var choiceOfAccount = PromptForString("Choice: ");
+
+                if (choiceOfAccount == "C")
+                {
+                    var newId = Guid.NewGuid();
+                    var newAccountId = 1;
+                    var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                    var newDate = DateTime.Now;
+                    var newTransaction = new Transaction
+
+                    {
+                        Id = newId,
+                        AccountId = newAccountId,
+                        Amount = newAmount,
+                        TransactionDate = newDate,
+                    };
+                    checkingAccount.Transactions.Add(newTransaction);
+                    Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+                }
+
+                if (choiceOfAccount == "S")
+                {
+                    var newId = Guid.NewGuid();
+                    var newAccountId = 2;
+                    var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                    var newDate = DateTime.Now;
+                    var newTransaction = new Transaction
+                    {
+                        Id = newId,
+                        AccountId = newAccountId,
+                        Amount = newAmount,
+                        TransactionDate = newDate,
+                    };
+                    savingsAccount.Transactions.Add(newTransaction);
+                    Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+                }
 
             }
 

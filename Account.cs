@@ -12,3 +12,4 @@ namespace FirstBankOfSuncoast
         public List<Transaction> Transactions { get; set; }
 
     }
+}
