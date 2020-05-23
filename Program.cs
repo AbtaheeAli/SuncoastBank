@@ -62,6 +62,20 @@ namespace FirstBankOfSuncoast
                 Transactions = new List<Transaction>()
             };
 
+            var userHasQuitApp = false;
+
+            while (userHasQuitApp == false)
+            {
+                Console.WriteLine("Welcome to First Bank of Suncoast! Please choose an option.");
+                Console.WriteLine("(V)iew account balances");
+                Console.WriteLine("(D)eposit funds into checking or savings accounts");
+                Console.WriteLine("(W)ithdraw funds from checking or savings accounts");
+                Console.WriteLine("(Q)uit the application");
+
+                var choice = PromptForString("Choice: ");
+
+            }
+
 
         }
     }
