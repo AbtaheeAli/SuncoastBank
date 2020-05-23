@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using CsvHelper;
 
 namespace FirstBankOfSuncoast
 {
     class Program
     {
-        static string PromptForString(string prompt)
-        {
-            Console.Write(prompt);
-            var userInput = Console.ReadLine();
-
-            return userInput;
-        }
-
         static int PromptForInteger(string prompt)
         {
             Console.Write(prompt);
@@ -46,9 +41,18 @@ namespace FirstBankOfSuncoast
                 return 0;
             }
         }
+        static string PromptForString(string prompt)
+        {
+            Console.Write(prompt);
+            var userInput = Console.ReadLine();
+
+            return userInput;
+        }
 
         static void Main(string[] args)
         {
+
+
             var checkingAccount = new Account()
             {
                 Id = 1,
@@ -62,6 +66,22 @@ namespace FirstBankOfSuncoast
                 AccountType = "Savings",
                 Transactions = new List<Transaction>()
             };
+
+            if (File.Exists("transactions.csv"))
+            {
+                // This object knows how to read characters from a file
+                var reader = new StreamReader("transactions.csv");
+
+                // And we give that file reading object to the CSV reading object
+                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+                // And tell it we have no headers
+                csvReader.Configuration.HasHeaderRecord = false;
+
+                // Ask the csv reading object to get records that are `int`
+                // and give them back to us as a List.
+                checkingAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
+                savingsAccount.Transactions = csvReader.GetRecord<Transaction>().ToList();
+            }
 
             var userHasQuitApp = false;
 
@@ -97,6 +117,7 @@ namespace FirstBankOfSuncoast
                     };
                     checkingAccount.Transactions.Add(newTransaction);
                     Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+
                 }
 
                 if (choiceOfAccount == "S")
@@ -114,11 +135,20 @@ namespace FirstBankOfSuncoast
                     };
                     savingsAccount.Transactions.Add(newTransaction);
                     Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+
                 }
 
             }
 
+            var fileWriter = new StreamWriter("transactions.csv");
+            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
+            csvWriter.WriteRecords(checkingAccount.Transactions);
+            csvWriter.WriteRecords(savingsAccount.Transactions);
+
+
+            fileWriter.Close();
 
         }
     }
 }
+
