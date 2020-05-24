@@ -136,7 +136,10 @@ namespace FirstBankOfSuncoast
                             TransactionDate = newDate,
                             Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to checking account."),
                         };
-
+                        if (newAmount <= 0)
+                        {
+                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                        }
                         checkingAccount.Transactions.Add(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your checking account.");
 
