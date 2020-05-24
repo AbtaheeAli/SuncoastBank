@@ -52,7 +52,6 @@ namespace FirstBankOfSuncoast
         static void Main(string[] args)
         {
 
-
             var checkingAccount = new Account()
             {
                 Id = 1,
@@ -67,16 +66,35 @@ namespace FirstBankOfSuncoast
                 Transactions = new List<Transaction>()
             };
 
+            // var listOfTransactions = new List<Transaction>();
+            // listOfTransactions.Add(checkingAccount.Transactions);
+
+            // listOfTransactions.Add(checkingAccount.Transactions);
+            // listOfTransactions.ForEach(Console.WriteLine);
+
             if (File.Exists("transactions.csv"))
             {
-
                 var reader = new StreamReader("transactions.csv");
-
 
                 var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
 
                 checkingAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
                 savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
+            }
+
+            // foreach (var transaction in checkingAccount.Transactions)
+
+            // {
+            //     var orderTransactionsByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
+            //     var description = checkingAccount.Description();
+
+            //     Console.WriteLine(description);
+            // }
+            var orderTransactionsByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
+            foreach (var transaction in orderTransactionsByTime)
+            {
+                var description = transaction.Description;
+                Console.WriteLine(description);
             }
 
             var userHasQuitApp = false;
@@ -116,7 +134,9 @@ namespace FirstBankOfSuncoast
                             AccountId = newAccountId,
                             Amount = newAmount,
                             TransactionDate = newDate,
+                            Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to checking account."),
                         };
+
                         checkingAccount.Transactions.Add(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your checking account.");
 
@@ -129,16 +149,22 @@ namespace FirstBankOfSuncoast
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
                         var newDate = DateTime.Now;
                         var newTransaction = new Transaction
+
                         {
                             Id = newId,
                             AccountId = newAccountId,
                             Amount = newAmount,
                             TransactionDate = newDate,
+                            Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to savings account."),
                         };
                         savingsAccount.Transactions.Add(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your savings account.");
 
                     }
+                }
+                if (choice == "W")
+                {
+
                 }
 
             }
