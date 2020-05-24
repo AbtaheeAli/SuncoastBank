@@ -167,8 +167,48 @@ namespace FirstBankOfSuncoast
                 }
                 if (choice == "W")
                 {
+                    Console.WriteLine("What account would you like to withdraw from? (C)hecking or (S)avings account.");
+                    var choiceOfAccount = PromptForString("Choice: ");
 
+                    if (choiceOfAccount == "C")
+                    {
+                        var newId = Guid.NewGuid();
+                        var newAccountId = 1;
+                        var newAmount = PromptForDecimal("How much would you like to withdraw? ");
+                        var newDate = DateTime.Now;
+                        var newTransaction = new Transaction
+
+                        {
+                            Id = newId,
+                            AccountId = newAccountId,
+                            Amount = newAmount * -1,
+                            TransactionDate = newDate,
+                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} from checking account."),
+                        };
+                        checkingAccount.Transactions.Add(newTransaction);
+                        Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
+                    }
+
+                    if (choiceOfAccount == "S")
+                    {
+                        var newId = Guid.NewGuid();
+                        var newAccountId = 2;
+                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                        var newDate = DateTime.Now;
+                        var newTransaction = new Transaction
+
+                        {
+                            Id = newId,
+                            AccountId = newAccountId,
+                            Amount = newAmount * -1,
+                            TransactionDate = newDate,
+                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} from savings account."),
+                        };
+                        savingsAccount.Transactions.Add(newTransaction);
+                        Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
+                    }
                 }
+
 
             }
 
