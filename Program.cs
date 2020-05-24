@@ -9,6 +9,9 @@ namespace FirstBankOfSuncoast
 {
     class Program
     {
+
+
+
         static int PromptForInteger(string prompt)
         {
             Console.Write(prompt);
@@ -66,11 +69,7 @@ namespace FirstBankOfSuncoast
                 Transactions = new List<Transaction>()
             };
 
-            // var listOfTransactions = new List<Transaction>();
-            // listOfTransactions.Add(checkingAccount.Transactions);
 
-            // listOfTransactions.Add(checkingAccount.Transactions);
-            // listOfTransactions.ForEach(Console.WriteLine);
 
             if (File.Exists("transactions.csv"))
             {
@@ -82,20 +81,31 @@ namespace FirstBankOfSuncoast
                 savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
             }
 
-            // foreach (var transaction in checkingAccount.Transactions)
 
-            // {
-            //     var orderTransactionsByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
-            //     var description = checkingAccount.Description();
-
-            //     Console.WriteLine(description);
-            // }
-            var orderTransactionsByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
-            foreach (var transaction in orderTransactionsByTime)
+            var orderCheckingAccountValueByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
+            foreach (var transaction in orderCheckingAccountValueByTime)
             {
                 var description = transaction.Description;
                 Console.WriteLine(description);
             }
+
+            var orderSavingsAccountValueByTime = savingsAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
+            foreach (var transaction in orderSavingsAccountValueByTime)
+            {
+                var description = transaction.Description;
+                Console.WriteLine(description);
+            }
+            var checkingAccountValue = new List<decimal>();
+            var savingsAccountValue = new List<decimal>();
+
+            foreach (var transaction in orderCheckingAccountValueByTime)
+            {
+                checkingAccountValue.Add(transaction.Amount);
+            }
+
+            var totalValue = checkingAccountValue.Sum();
+            Console.WriteLine($"Your current balance of your checking account is {totalValue}");
+
 
             var userHasQuitApp = false;
 
@@ -183,8 +193,9 @@ namespace FirstBankOfSuncoast
                             AccountId = newAccountId,
                             Amount = newAmount * -1,
                             TransactionDate = newDate,
-                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} from checking account."),
+                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} to checking account."),
                         };
+
                         checkingAccount.Transactions.Add(newTransaction);
                         Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
                     }
@@ -193,7 +204,7 @@ namespace FirstBankOfSuncoast
                     {
                         var newId = Guid.NewGuid();
                         var newAccountId = 2;
-                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                        var newAmount = PromptForDecimal("How much would you like to withdraw? ");
                         var newDate = DateTime.Now;
                         var newTransaction = new Transaction
 

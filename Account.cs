@@ -13,11 +13,10 @@ namespace FirstBankOfSuncoast
         public DateTime TransactionDate { get; set; }
 
 
+
+        // public decimal GetBalance();
+        // {
+
+        // }
     }
-
-
-    // public decimal GetBalance();
-    // {
-
-    // }
 }
