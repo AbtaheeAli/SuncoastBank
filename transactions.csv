@@ -1,4 +1,2 @@
 Id,AccountId,Amount,Description,TransactionDate
-9e388387-4a78-49b2-934c-e4b02f36402c,1,1000,User 1 deposited 1000 at 5/24/2020 2:17:20 PM to checking account.,05/24/2020 14:17:20
-554b660d-aa28-4941-a085-4e73c5d5255e,1,500,User 1 withdrew 500 at 5/24/2020 2:17:25 PM to checking account.,05/24/2020 14:17:25
-21743bd6-a77d-41c0-8b91-a6f26e854eb5,1,-500,User 1 withdrew 500 at 5/24/2020 2:18:56 PM to checking account.,05/24/2020 14:18:56
+92abd6c0-c2fe-41b3-a2e1-8a7a4f76f18e,1,100,User 1 deposited 100 at 5/24/2020 6:59:50 PM to checking account.,05/24/2020 18:59:50

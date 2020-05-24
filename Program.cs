@@ -77,8 +77,12 @@ namespace FirstBankOfSuncoast
 
                 var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
 
-                checkingAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
-                savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
+                var allTransactions = csvReader.GetRecords<Transaction>();
+                // savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
+                var checkingTransaction = allTransactions.Where(transactions => transactions.AccountId == 1).ToList();
+                var savingsTransaction = allTransactions.Where(transactions => transactions.AccountId == 2).ToList();
+                checkingAccount.Transactions = checkingTransaction;
+                savingsAccount.Transactions = savingsTransaction;
             }
 
 
@@ -103,8 +107,16 @@ namespace FirstBankOfSuncoast
                 checkingAccountValue.Add(transaction.Amount);
             }
 
-            var totalValue = checkingAccountValue.Sum();
-            Console.WriteLine($"Your current balance of your checking account is {totalValue}");
+            foreach (var transaction in orderSavingsAccountValueByTime)
+            {
+                savingsAccountValue.Add(transaction.Amount);
+            }
+
+            var totalValueForCheckingAccount = checkingAccountValue.Sum();
+            Console.WriteLine($"Your current balance of your checking account is {totalValueForCheckingAccount}");
+
+            var totalValueForSavingsAccount = savingsAccountValue.Sum();
+            Console.WriteLine($"Your current balance of your savings account is {totalValueForSavingsAccount}");
 
 
             var userHasQuitApp = false;
