@@ -36,31 +36,22 @@ namespace FirstBankOfSuncoast
         }
 
 
-        public void RecallTransactionsByTime()
-        {
-            var orderAccountValueByTime = Transactions.OrderBy(transactions => transactions.TransactionDate);
-            foreach (var transaction in orderAccountValueByTime)
-            {
-                var description = transaction.Description();
-                Console.WriteLine(description);
-            }
 
-        }
 
         public void DisplayCheckingAccountBalance()
         {
-
             var checkingTransaction = Transactions.Where(transactions => transactions.AccountId == 1).ToList();
+            var withdrawTotalValue = checkingTransaction.Where(transactions => transactions.TransactionType == "Withdrawal");
+            var depositTotalValue = checkingTransaction.Where(transactions => transactions.TransactionType == "Deposit");
+            var withdrawTotal = withdrawTotalValue.Sum(transactions => transactions.Amount);
+            var depositTotal = depositTotalValue.Sum(transactions => transactions.Amount);
 
-            var checkingAccountValue = new List<decimal>();
 
-            foreach (var transaction in checkingTransaction)
-            {
-                checkingAccountValue.Add(transaction.Amount);
-            }
 
-            var totalValueForCheckingAccount = checkingAccountValue.Sum();
-            Console.WriteLine($"Your current balance of your checking account is {totalValueForCheckingAccount}");
+
+            var checkingAccountValue = depositTotal - withdrawTotal;
+
+            Console.WriteLine($"Your current balance of your checking account is {checkingAccountValue}");
 
 
         }
@@ -68,16 +59,14 @@ namespace FirstBankOfSuncoast
         public void DisplaySavingsAccountBalance()
         {
             var savingsTransaction = Transactions.Where(transactions => transactions.AccountId == 2).ToList();
+            var withdrawTotalValue = savingsTransaction.Where(transactions => transactions.TransactionType == "Withdrawal");
+            var depositTotalValue = savingsTransaction.Where(transactions => transactions.TransactionType == "Deposit");
+            var withdrawTotal = withdrawTotalValue.Sum(transactions => transactions.Amount);
+            var depositTotal = depositTotalValue.Sum(transactions => transactions.Amount);
 
-            var savingsAccountValue = new List<decimal>();
+            var savingsAccountValue = depositTotal - withdrawTotal;
 
-            foreach (var transaction in savingsTransaction)
-            {
-                savingsAccountValue.Add(transaction.Amount);
-            }
-
-            var totalValueForSavingsAccount = savingsAccountValue.Sum();
-            Console.WriteLine($"Your current balance of your savings account is {totalValueForSavingsAccount}");
+            Console.WriteLine($"Your current balance of your savings account is {savingsAccountValue}");
         }
 
         internal void DepositChecking(Transaction newTransaction)

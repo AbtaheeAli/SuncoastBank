@@ -16,6 +16,11 @@ namespace FirstBankOfSuncoast
             return $"The amount of {Amount} was {TransactionType} into {AccountType} on {TransactionDate}";
         }
         public DateTime TransactionDate { get; set; }
+
+        // public decimal GetBalance();
+        // {
+
+        // }
     }
 
 

@@ -54,7 +54,10 @@ namespace FirstBankOfSuncoast
             var transactionsController = new TransactionsController();
             transactionsController.LoadAllTransactions();
 
-            transactionsController.RecallTransactionsByTime();
+
+
+            transactionsController.DisplayCheckingAccountBalance();
+            transactionsController.DisplaySavingsAccountBalance();
 
 
             var userHasQuitApp = false;
@@ -128,6 +131,7 @@ namespace FirstBankOfSuncoast
                     Console.WriteLine("What account would you like to withdraw from? (C)hecking or (S)avings account.");
                     var choiceOfAccount = PromptForString("Choice: ");
 
+
                     if (choiceOfAccount == "C")
                     {
 
@@ -135,10 +139,12 @@ namespace FirstBankOfSuncoast
 
                         var newTransaction = new Transaction
 
+
+
                         {
                             Id = Guid.NewGuid(),
                             AccountId = 1,
-                            Amount = newAmount * -1,
+                            Amount = newAmount,
                             AccountType = ("Checking"),
                             TransactionType = ("Withdrawal"),
                             TransactionDate = DateTime.Now,
@@ -159,7 +165,7 @@ namespace FirstBankOfSuncoast
                         {
                             Id = Guid.NewGuid(),
                             AccountId = 2,
-                            Amount = newAmount * -1,
+                            Amount = newAmount,
                             AccountType = ("Savings"),
                             TransactionType = ("Withdrawal"),
                             TransactionDate = DateTime.Now,
