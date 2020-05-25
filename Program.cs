@@ -54,21 +54,6 @@ namespace FirstBankOfSuncoast
             var transactionsController = new TransactionsController();
             transactionsController.LoadAllTransactions();
 
-            // var checkingAccount = new Account()
-            // {
-            //     Id = 1,
-            //     AccountType = "Checking",
-            //     Transactions = new List<Transaction>(),
-            //     // Value = transactionsController.CheckingAccountValues(),
-            // };
-
-            // var savingsAccount = new Account()
-            // {
-            //     Id = 2,
-            //     AccountType = "Savings",
-            //     Transactions = new List<Transaction>()
-            // };
-
             transactionsController.RecallTransactionsByTime();
 
 
@@ -98,17 +83,15 @@ namespace FirstBankOfSuncoast
 
                     if (choiceOfAccount == "C")
                     {
-                        var newId = Guid.NewGuid();
-                        var newAccountId = 1;
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
-                        var newDate = DateTime.Now;
                         var newTransaction = new Transaction
-
                         {
-                            Id = newId,
-                            AccountId = newAccountId,
+                            Id = Guid.NewGuid(),
+                            AccountId = 1,
                             Amount = newAmount,
-                            TransactionDate = newDate,
+                            AccountType = ("Checking"),
+                            TransactionType = ("Deposit"),
+                            TransactionDate = DateTime.Now,
                         };
                         if (newAmount <= 0)
                         {
@@ -123,7 +106,6 @@ namespace FirstBankOfSuncoast
                     if (choiceOfAccount == "S")
                     {
 
-
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
 
                         var newTransaction = new Transaction
@@ -131,8 +113,9 @@ namespace FirstBankOfSuncoast
                             Id = Guid.NewGuid(),
                             AccountId = 2,
                             Amount = newAmount,
+                            AccountType = ("Savings"),
+                            TransactionType = ("Deposit"),
                             TransactionDate = DateTime.Now,
-                            // Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to savings account."),
                         };
                         transactionsController.DepositSavings(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your savings account.");
@@ -147,17 +130,18 @@ namespace FirstBankOfSuncoast
 
                     if (choiceOfAccount == "C")
                     {
-                        var newId = Guid.NewGuid();
-                        var newAccountId = 1;
+
                         var newAmount = PromptForDecimal("How much would you like to withdraw? ");
-                        var newDate = DateTime.Now;
+
                         var newTransaction = new Transaction
 
                         {
-                            Id = newId,
-                            AccountId = newAccountId,
+                            Id = Guid.NewGuid(),
+                            AccountId = 1,
                             Amount = newAmount * -1,
-                            TransactionDate = newDate,
+                            AccountType = ("Checking"),
+                            TransactionType = ("Withdrawal"),
+                            TransactionDate = DateTime.Now,
                         };
 
                         transactionsController.WithdrawChecking(newTransaction);
@@ -167,17 +151,18 @@ namespace FirstBankOfSuncoast
 
                     if (choiceOfAccount == "S")
                     {
-                        var newId = Guid.NewGuid();
-                        var newAccountId = 2;
+
                         var newAmount = PromptForDecimal("How much would you like to withdraw? ");
-                        var newDate = DateTime.Now;
+
                         var newTransaction = new Transaction
 
                         {
-                            Id = newId,
-                            AccountId = newAccountId,
+                            Id = Guid.NewGuid(),
+                            AccountId = 2,
                             Amount = newAmount * -1,
-                            TransactionDate = newDate,
+                            AccountType = ("Savings"),
+                            TransactionType = ("Withdrawal"),
+                            TransactionDate = DateTime.Now,
 
                         };
                         transactionsController.WithdrawSavings(newTransaction);
