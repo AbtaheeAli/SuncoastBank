@@ -9,9 +9,6 @@ namespace FirstBankOfSuncoast
 {
     class Program
     {
-
-
-
         static int PromptForInteger(string prompt)
         {
             Console.Write(prompt);
@@ -54,69 +51,25 @@ namespace FirstBankOfSuncoast
 
         static void Main(string[] args)
         {
+            var transactionsController = new TransactionsController();
+            transactionsController.LoadAllTransactions();
 
-            var checkingAccount = new Account()
-            {
-                Id = 1,
-                AccountType = "Checking",
-                Transactions = new List<Transaction>()
-            };
+            // var checkingAccount = new Account()
+            // {
+            //     Id = 1,
+            //     AccountType = "Checking",
+            //     Transactions = new List<Transaction>(),
+            //     // Value = transactionsController.CheckingAccountValues(),
+            // };
 
-            var savingsAccount = new Account()
-            {
-                Id = 2,
-                AccountType = "Savings",
-                Transactions = new List<Transaction>()
-            };
+            // var savingsAccount = new Account()
+            // {
+            //     Id = 2,
+            //     AccountType = "Savings",
+            //     Transactions = new List<Transaction>()
+            // };
 
-
-
-            if (File.Exists("transactions.csv"))
-            {
-                var reader = new StreamReader("transactions.csv");
-
-                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-
-                var allTransactions = csvReader.GetRecords<Transaction>();
-                // savingsAccount.Transactions = csvReader.GetRecords<Transaction>().ToList();
-                var checkingTransaction = allTransactions.Where(transactions => transactions.AccountId == 1).ToList();
-                var savingsTransaction = allTransactions.Where(transactions => transactions.AccountId == 2).ToList();
-                checkingAccount.Transactions = checkingTransaction;
-                savingsAccount.Transactions = savingsTransaction;
-            }
-
-
-            var orderCheckingAccountValueByTime = checkingAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
-            foreach (var transaction in orderCheckingAccountValueByTime)
-            {
-                var description = transaction.Description;
-                Console.WriteLine(description);
-            }
-
-            var orderSavingsAccountValueByTime = savingsAccount.Transactions.OrderBy(transactions => transactions.TransactionDate);
-            foreach (var transaction in orderSavingsAccountValueByTime)
-            {
-                var description = transaction.Description;
-                Console.WriteLine(description);
-            }
-            var checkingAccountValue = new List<decimal>();
-            var savingsAccountValue = new List<decimal>();
-
-            foreach (var transaction in orderCheckingAccountValueByTime)
-            {
-                checkingAccountValue.Add(transaction.Amount);
-            }
-
-            foreach (var transaction in orderSavingsAccountValueByTime)
-            {
-                savingsAccountValue.Add(transaction.Amount);
-            }
-
-            var totalValueForCheckingAccount = checkingAccountValue.Sum();
-            Console.WriteLine($"Your current balance of your checking account is {totalValueForCheckingAccount}");
-
-            var totalValueForSavingsAccount = savingsAccountValue.Sum();
-            Console.WriteLine($"Your current balance of your savings account is {totalValueForSavingsAccount}");
+            transactionsController.RecallTransactionsByTime();
 
 
             var userHasQuitApp = false;
@@ -156,34 +109,34 @@ namespace FirstBankOfSuncoast
                             AccountId = newAccountId,
                             Amount = newAmount,
                             TransactionDate = newDate,
-                            Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to checking account."),
                         };
                         if (newAmount <= 0)
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
                         }
-                        checkingAccount.Transactions.Add(newTransaction);
+                        transactionsController.DepositChecking(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+                        transactionsController.SaveAllTransactions();
 
                     }
 
                     if (choiceOfAccount == "S")
                     {
-                        var newId = Guid.NewGuid();
-                        var newAccountId = 2;
-                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
-                        var newDate = DateTime.Now;
-                        var newTransaction = new Transaction
 
+
+                        var newAmount = PromptForDecimal("How much would you like to deposit? ");
+
+                        var newTransaction = new Transaction
                         {
-                            Id = newId,
-                            AccountId = newAccountId,
+                            Id = Guid.NewGuid(),
+                            AccountId = 2,
                             Amount = newAmount,
-                            TransactionDate = newDate,
-                            Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to savings account."),
+                            TransactionDate = DateTime.Now,
+                            // Description = ($"User {newAccountId} deposited {newAmount} at {newDate} to savings account."),
                         };
-                        savingsAccount.Transactions.Add(newTransaction);
+                        transactionsController.DepositSavings(newTransaction);
                         Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+                        transactionsController.SaveAllTransactions();
 
                     }
                 }
@@ -205,11 +158,11 @@ namespace FirstBankOfSuncoast
                             AccountId = newAccountId,
                             Amount = newAmount * -1,
                             TransactionDate = newDate,
-                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} to checking account."),
                         };
 
-                        checkingAccount.Transactions.Add(newTransaction);
+                        transactionsController.WithdrawChecking(newTransaction);
                         Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
+                        transactionsController.SaveAllTransactions();
                     }
 
                     if (choiceOfAccount == "S")
@@ -225,23 +178,22 @@ namespace FirstBankOfSuncoast
                             AccountId = newAccountId,
                             Amount = newAmount * -1,
                             TransactionDate = newDate,
-                            Description = ($"User {newAccountId} withdrew {newAmount} at {newDate} from savings account."),
+
                         };
-                        savingsAccount.Transactions.Add(newTransaction);
+                        transactionsController.WithdrawSavings(newTransaction);
                         Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
+                        transactionsController.SaveAllTransactions();
                     }
                 }
 
 
             }
 
-            var fileWriter = new StreamWriter("transactions.csv");
-            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
-            csvWriter.WriteRecords(checkingAccount.Transactions);
-            csvWriter.WriteRecords(savingsAccount.Transactions);
 
 
-            fileWriter.Close();
+
+
+
 
         }
     }
