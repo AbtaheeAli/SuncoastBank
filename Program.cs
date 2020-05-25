@@ -78,6 +78,21 @@ namespace FirstBankOfSuncoast
                 {
                     userHasQuitApp = true;
                 }
+                if (choice == "V")
+                {
+                    Console.WriteLine("What account would you like to see the balance of? (C)hecking or (S)avings account.");
+                    var choiceOfAccount = PromptForString("Choice: ");
+
+                    if (choice == "C")
+                    {
+                        transactionsController.DisplayCheckingAccountBalance();
+                    }
+
+                    if (choice == "S")
+                    {
+                        transactionsController.DisplaySavingsAccountBalance();
+                    }
+                }
 
                 if (choice == "D")
                 {
@@ -130,7 +145,11 @@ namespace FirstBankOfSuncoast
                 {
                     Console.WriteLine("What account would you like to withdraw from? (C)hecking or (S)avings account.");
                     var choiceOfAccount = PromptForString("Choice: ");
+                    var maxAmountThatCanBeWithdrawn = Math.Abs();
+                    if (choiceOfAccount == "Checking")
+                    {
 
+                    }
 
                     if (choiceOfAccount == "C")
                     {
