@@ -54,8 +54,10 @@ namespace FirstBankOfSuncoast
             var transactionsController = new TransactionsController();
             transactionsController.LoadAllTransactions();
 
-            transactionsController.DisplayCheckingAccountBalance();
-            transactionsController.DisplaySavingsAccountBalance();
+            transactionsController.CalculateCheckingAccountBalance();
+            transactionsController.CalculateSavingsAccountBalance();
+            Console.WriteLine($"Your balance in your checking account is {transactionsController.checkingAccountValue}");
+            Console.WriteLine($"Your balance in your checking account is {transactionsController.savingsAccountValue}");
 
             var userHasQuitApp = false;
 
@@ -81,10 +83,10 @@ namespace FirstBankOfSuncoast
                     Console.WriteLine("Here are the balances of your checking and savings account.");
                     Console.WriteLine();
 
-                    transactionsController.DisplayCheckingAccountBalance();
-                    Console.WriteLine();
-                    transactionsController.DisplaySavingsAccountBalance();
-
+                    transactionsController.CalculateCheckingAccountBalance();
+                    transactionsController.CalculateSavingsAccountBalance();
+                    Console.WriteLine($"Your balance in your checking account is {transactionsController.checkingAccountValue}");
+                    Console.WriteLine($"Your balance in your checking account is {transactionsController.savingsAccountValue}");
                 }
 
                 if (choice == "D")
@@ -118,6 +120,7 @@ namespace FirstBankOfSuncoast
                             transactionsController.DepositChecking(newTransaction);
                             Console.WriteLine($"You have deposited {newAmount} into your checking account.");
                             transactionsController.SaveAllTransactions();
+                            transactionsController.CalculateCheckingAccountBalance();
                         }
                     }
 
@@ -145,6 +148,7 @@ namespace FirstBankOfSuncoast
                             transactionsController.DepositSavings(newTransaction);
                             Console.WriteLine($"You have deposited {newAmount} into your savings account.");
                             transactionsController.SaveAllTransactions();
+                            transactionsController.CalculateSavingsAccountBalance();
                         }
 
                     }
@@ -183,6 +187,7 @@ namespace FirstBankOfSuncoast
                             transactionsController.WithdrawChecking(newTransaction);
                             Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
                             transactionsController.SaveAllTransactions();
+                            transactionsController.CalculateCheckingAccountBalance();
                         }
                     }
 
@@ -218,6 +223,7 @@ namespace FirstBankOfSuncoast
                             transactionsController.WithdrawSavings(newTransaction);
                             Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
                             transactionsController.SaveAllTransactions();
+                            transactionsController.CalculateSavingsAccountBalance();
                         }
                     }
 

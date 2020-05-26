@@ -41,7 +41,7 @@ namespace FirstBankOfSuncoast
 
 
 
-        public void DisplayCheckingAccountBalance()
+        public void CalculateCheckingAccountBalance()
         {
             var checkingTransaction = Transactions.Where(transactions => transactions.AccountId == 1).ToList();
             var withdrawTotalValue = checkingTransaction.Where(transactions => transactions.TransactionType == "Withdrawal");
@@ -54,12 +54,12 @@ namespace FirstBankOfSuncoast
 
             checkingAccountValue = depositTotal - withdrawTotal;
 
-            Console.WriteLine($"Your current balance of your checking account is {checkingAccountValue}");
+
 
 
         }
 
-        public void DisplaySavingsAccountBalance()
+        public void CalculateSavingsAccountBalance()
         {
             var savingsTransaction = Transactions.Where(transactions => transactions.AccountId == 2).ToList();
             var withdrawTotalValue = savingsTransaction.Where(transactions => transactions.TransactionType == "Withdrawal");
@@ -69,7 +69,7 @@ namespace FirstBankOfSuncoast
 
             savingsAccountValue = depositTotal - withdrawTotal;
 
-            Console.WriteLine($"Your current balance of your savings account is {savingsAccountValue}");
+
         }
 
         internal void DepositChecking(Transaction newTransaction)

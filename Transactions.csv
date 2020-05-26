@@ -1,3 +1,3 @@
 Id,AccountId,Amount,AccountType,TransactionType,TransactionDate
-6dac614d-847a-43f1-90e7-393766e308f8,1,123,Checking,Deposit,05/25/2020 22:54:10
-d070c48f-1ca1-4ba2-92b9-95252dbde059,1,12,Checking,Deposit,05/25/2020 22:54:50
+7ac9580d-1829-427f-8e03-aaf7656e79c9,2,12,Savings,Deposit,05/26/2020 08:18:24
+c9854196-607a-4089-a04a-4496609a3667,2,1,Savings,Withdrawal,05/26/2020 08:18:28
