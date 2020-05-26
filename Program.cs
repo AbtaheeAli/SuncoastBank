@@ -77,22 +77,28 @@ namespace FirstBankOfSuncoast
                 }
                 if (choice == "V")
                 {
-                    Console.WriteLine("What account would you like to see the balance of?");
+                    Console.WriteLine();
+                    Console.WriteLine("Here are the balances of your checking and savings account.");
+                    Console.WriteLine();
 
                     transactionsController.DisplayCheckingAccountBalance();
-
+                    Console.WriteLine();
                     transactionsController.DisplaySavingsAccountBalance();
 
                 }
 
                 if (choice == "D")
                 {
+                    Console.WriteLine();
                     Console.WriteLine("What account would you like to deposit funds into? (C)hecking or (S)avings account.");
+                    Console.WriteLine();
                     var choiceOfAccount = PromptForString("Choice: ");
+                    Console.WriteLine();
 
                     if (choiceOfAccount == "C")
                     {
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
+                        Console.WriteLine();
                         var newTransaction = new Transaction
                         {
                             Id = Guid.NewGuid(),
@@ -119,7 +125,7 @@ namespace FirstBankOfSuncoast
                     {
 
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
-
+                        Console.WriteLine();
                         var newTransaction = new Transaction
                         {
                             Id = Guid.NewGuid(),
