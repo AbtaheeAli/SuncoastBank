@@ -54,11 +54,8 @@ namespace FirstBankOfSuncoast
             var transactionsController = new TransactionsController();
             transactionsController.LoadAllTransactions();
 
-
-
             transactionsController.DisplayCheckingAccountBalance();
             transactionsController.DisplaySavingsAccountBalance();
-
 
             var userHasQuitApp = false;
 
@@ -80,18 +77,12 @@ namespace FirstBankOfSuncoast
                 }
                 if (choice == "V")
                 {
-                    Console.WriteLine("What account would you like to see the balance of? (C)hecking or (S)avings account.");
-                    var choiceOfAccount = PromptForString("Choice: ");
+                    Console.WriteLine("What account would you like to see the balance of?");
 
-                    if (choice == "C")
-                    {
-                        transactionsController.DisplayCheckingAccountBalance();
-                    }
+                    transactionsController.DisplayCheckingAccountBalance();
 
-                    if (choice == "S")
-                    {
-                        transactionsController.DisplaySavingsAccountBalance();
-                    }
+                    transactionsController.DisplaySavingsAccountBalance();
+
                 }
 
                 if (choice == "D")
@@ -115,10 +106,13 @@ namespace FirstBankOfSuncoast
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
                         }
-                        transactionsController.DepositChecking(newTransaction);
-                        Console.WriteLine($"You have deposited {newAmount} into your checking account.");
-                        transactionsController.SaveAllTransactions();
 
+                        else
+                        {
+                            transactionsController.DepositChecking(newTransaction);
+                            Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+                            transactionsController.SaveAllTransactions();
+                        }
                     }
 
                     if (choiceOfAccount == "S")
@@ -135,9 +129,17 @@ namespace FirstBankOfSuncoast
                             TransactionType = ("Deposit"),
                             TransactionDate = DateTime.Now,
                         };
-                        transactionsController.DepositSavings(newTransaction);
-                        Console.WriteLine($"You have deposited {newAmount} into your savings account.");
-                        transactionsController.SaveAllTransactions();
+                        if (newAmount <= 0)
+                        {
+                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                        }
+
+                        else
+                        {
+                            transactionsController.DepositSavings(newTransaction);
+                            Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+                            transactionsController.SaveAllTransactions();
+                        }
 
                     }
                 }
@@ -145,20 +147,12 @@ namespace FirstBankOfSuncoast
                 {
                     Console.WriteLine("What account would you like to withdraw from? (C)hecking or (S)avings account.");
                     var choiceOfAccount = PromptForString("Choice: ");
-                    var maxAmountThatCanBeWithdrawn = Math.Abs();
-                    if (choiceOfAccount == "Checking")
-                    {
-
-                    }
-
                     if (choiceOfAccount == "C")
                     {
 
                         var newAmount = PromptForDecimal("How much would you like to withdraw? ");
 
                         var newTransaction = new Transaction
-
-
 
                         {
                             Id = Guid.NewGuid(),
@@ -168,10 +162,22 @@ namespace FirstBankOfSuncoast
                             TransactionType = ("Withdrawal"),
                             TransactionDate = DateTime.Now,
                         };
+                        if (newAmount <= 0)
+                        {
+                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                        }
 
-                        transactionsController.WithdrawChecking(newTransaction);
-                        Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
-                        transactionsController.SaveAllTransactions();
+                        if (transactionsController.checkingAccountValue < newAmount)
+                        {
+                            Console.WriteLine($"The amount,{newAmount}, is more than what you have available in you checking account. Please try again.");
+                        }
+
+                        else
+                        {
+                            transactionsController.WithdrawChecking(newTransaction);
+                            Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
+                            transactionsController.SaveAllTransactions();
+                        }
                     }
 
                     if (choiceOfAccount == "S")
@@ -190,22 +196,29 @@ namespace FirstBankOfSuncoast
                             TransactionDate = DateTime.Now,
 
                         };
-                        transactionsController.WithdrawSavings(newTransaction);
-                        Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
-                        transactionsController.SaveAllTransactions();
+                        if (newAmount <= 0)
+                        {
+                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                        }
+
+
+                        if (transactionsController.savingsAccountValue < newAmount)
+                        {
+                            Console.WriteLine($"The amount, {newAmount}, is more than what you have available in you savings account. Please try again.");
+                        }
+                        else
+                        {
+                            transactionsController.WithdrawSavings(newTransaction);
+                            Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
+                            transactionsController.SaveAllTransactions();
+                        }
                     }
+
                 }
 
 
             }
 
-
-
-
-
-
-
         }
     }
 }
-

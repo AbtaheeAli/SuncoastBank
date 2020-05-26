@@ -11,6 +11,9 @@ namespace FirstBankOfSuncoast
     {
         private List<Transaction> Transactions = new List<Transaction>();
 
+        public decimal checkingAccountValue { get; set; }
+        public decimal savingsAccountValue { get; set; }
+
         public void SaveAllTransactions()
         {
             var writer = new StreamWriter("Transactions.csv");
@@ -49,7 +52,7 @@ namespace FirstBankOfSuncoast
 
 
 
-            var checkingAccountValue = depositTotal - withdrawTotal;
+            checkingAccountValue = depositTotal - withdrawTotal;
 
             Console.WriteLine($"Your current balance of your checking account is {checkingAccountValue}");
 
@@ -64,7 +67,7 @@ namespace FirstBankOfSuncoast
             var withdrawTotal = withdrawTotalValue.Sum(transactions => transactions.Amount);
             var depositTotal = depositTotalValue.Sum(transactions => transactions.Amount);
 
-            var savingsAccountValue = depositTotal - withdrawTotal;
+            savingsAccountValue = depositTotal - withdrawTotal;
 
             Console.WriteLine($"Your current balance of your savings account is {savingsAccountValue}");
         }
