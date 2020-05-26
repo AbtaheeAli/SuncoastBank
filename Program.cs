@@ -175,7 +175,7 @@ namespace FirstBankOfSuncoast
 
                         if (transactionsController.checkingAccountValue < newAmount)
                         {
-                            Console.WriteLine($"The amount,{newAmount}, is more than what you have available in you checking account. Please try again.");
+                            Console.WriteLine("The amount is more than what you have available in you checking account. Please try again.");
                         }
 
                         else
@@ -210,8 +210,9 @@ namespace FirstBankOfSuncoast
 
                         if (transactionsController.savingsAccountValue < newAmount)
                         {
-                            Console.WriteLine($"The amount, {newAmount}, is more than what you have available in you savings account. Please try again.");
+                            Console.WriteLine("The amount,is more than what you have available in you savings account. Please try again.");
                         }
+
                         else
                         {
                             transactionsController.WithdrawSavings(newTransaction);
