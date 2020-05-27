@@ -19,7 +19,6 @@ namespace FirstBankOfSuncoast
             {
                 return userInput;
             }
-
             else
             {
                 Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
@@ -38,7 +37,6 @@ namespace FirstBankOfSuncoast
             {
                 return userInput;
             }
-
             else
             {
                 Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
@@ -124,7 +122,6 @@ namespace FirstBankOfSuncoast
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
                         }
-
                         else
                         {
                             transactionsController.DepositChecking(newTransaction);
@@ -153,7 +150,6 @@ namespace FirstBankOfSuncoast
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
                         }
-
                         else
                         {
                             transactionsController.DepositSavings(newTransaction);
@@ -193,7 +189,6 @@ namespace FirstBankOfSuncoast
                         {
                             Console.WriteLine("The amount is more than what you have available in you checking account. Please try again.");
                         }
-
                         else
                         {
                             transactionsController.WithdrawChecking(newTransaction);
@@ -226,7 +221,6 @@ namespace FirstBankOfSuncoast
                         {
                             Console.WriteLine("The amount,is more than what you have available in you savings account. Please try again.");
                         }
-
                         else
                         {
                             transactionsController.WithdrawSavings(newTransaction);
