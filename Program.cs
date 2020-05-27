@@ -25,6 +25,7 @@ namespace FirstBankOfSuncoast
                 return 0;
             }
         }
+
         static int PromptForDecimal(string prompt)
         {
             Console.Write(prompt);
@@ -41,6 +42,7 @@ namespace FirstBankOfSuncoast
                 return 0;
             }
         }
+
         static string PromptForString(string prompt)
         {
             Console.Write(prompt);
@@ -95,6 +97,7 @@ namespace FirstBankOfSuncoast
                     Console.WriteLine();
                     Console.WriteLine("What account would you like to deposit funds into? (C)hecking or (S)avings account.");
                     Console.WriteLine();
+
                     var choiceOfAccount = PromptForString("Choice: ");
                     Console.WriteLine();
 
@@ -228,12 +231,8 @@ namespace FirstBankOfSuncoast
                             transactionsController.CalculateSavingsAccountBalance();
                         }
                     }
-
                 }
-
-
             }
-
         }
     }
 }

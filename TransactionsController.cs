@@ -10,10 +10,8 @@ namespace FirstBankOfSuncoast
     class TransactionsController
     {
         private List<Transaction> Transactions = new List<Transaction>();
-
         public decimal checkingAccountValue { get; set; }
         public decimal savingsAccountValue { get; set; }
-
         public void SaveAllTransactions()
         {
             var writer = new StreamWriter("Transactions.csv");
@@ -37,9 +35,6 @@ namespace FirstBankOfSuncoast
 
             }
         }
-
-
-
 
         public void CalculateCheckingAccountBalance()
         {

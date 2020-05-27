@@ -2,7 +2,6 @@ using System;
 
 namespace FirstBankOfSuncoast
 {
-
     public class Transaction
     {
         public Guid Id { get; set; }
