@@ -19,9 +19,11 @@ namespace FirstBankOfSuncoast
             {
                 return userInput;
             }
+
             else
             {
                 Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
+
                 return 0;
             }
         }
@@ -36,9 +38,11 @@ namespace FirstBankOfSuncoast
             {
                 return userInput;
             }
+
             else
             {
                 Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
+
                 return 0;
             }
         }
