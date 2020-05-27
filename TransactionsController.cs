@@ -49,14 +49,7 @@ namespace FirstBankOfSuncoast
             var withdrawTotal = withdrawTotalValue.Sum(transactions => transactions.Amount);
             var depositTotal = depositTotalValue.Sum(transactions => transactions.Amount);
 
-
-
-
             checkingAccountValue = depositTotal - withdrawTotal;
-
-
-
-
         }
 
         public void CalculateSavingsAccountBalance()
@@ -68,8 +61,6 @@ namespace FirstBankOfSuncoast
             var depositTotal = depositTotalValue.Sum(transactions => transactions.Amount);
 
             savingsAccountValue = depositTotal - withdrawTotal;
-
-
         }
 
         internal void DepositChecking(Transaction newTransaction)

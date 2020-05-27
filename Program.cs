@@ -77,6 +77,7 @@ namespace FirstBankOfSuncoast
                 {
                     userHasQuitApp = true;
                 }
+
                 if (choice == "V")
                 {
                     Console.WriteLine();
@@ -101,6 +102,7 @@ namespace FirstBankOfSuncoast
                     {
                         var newAmount = PromptForDecimal("How much would you like to deposit? ");
                         Console.WriteLine();
+
                         var newTransaction = new Transaction
                         {
                             Id = Guid.NewGuid(),
@@ -110,6 +112,7 @@ namespace FirstBankOfSuncoast
                             TransactionType = ("Deposit"),
                             TransactionDate = DateTime.Now,
                         };
+
                         if (newAmount <= 0)
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
@@ -138,6 +141,7 @@ namespace FirstBankOfSuncoast
                             TransactionType = ("Deposit"),
                             TransactionDate = DateTime.Now,
                         };
+
                         if (newAmount <= 0)
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
@@ -153,17 +157,17 @@ namespace FirstBankOfSuncoast
 
                     }
                 }
+
                 if (choice == "W")
                 {
                     Console.WriteLine("What account would you like to withdraw from? (C)hecking or (S)avings account.");
                     var choiceOfAccount = PromptForString("Choice: ");
+
                     if (choiceOfAccount == "C")
                     {
-
                         var newAmount = PromptForDecimal("How much would you like to withdraw? ");
 
                         var newTransaction = new Transaction
-
                         {
                             Id = Guid.NewGuid(),
                             AccountId = 1,
@@ -172,6 +176,7 @@ namespace FirstBankOfSuncoast
                             TransactionType = ("Withdrawal"),
                             TransactionDate = DateTime.Now,
                         };
+
                         if (newAmount <= 0)
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
@@ -193,11 +198,9 @@ namespace FirstBankOfSuncoast
 
                     if (choiceOfAccount == "S")
                     {
-
                         var newAmount = PromptForDecimal("How much would you like to withdraw? ");
 
                         var newTransaction = new Transaction
-
                         {
                             Id = Guid.NewGuid(),
                             AccountId = 2,
@@ -205,13 +208,12 @@ namespace FirstBankOfSuncoast
                             AccountType = ("Savings"),
                             TransactionType = ("Withdrawal"),
                             TransactionDate = DateTime.Now,
-
                         };
+
                         if (newAmount <= 0)
                         {
                             Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
                         }
-
 
                         if (transactionsController.savingsAccountValue < newAmount)
                         {
