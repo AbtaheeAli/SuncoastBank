@@ -1,5 +1,9 @@
 # SuncoastBank
 
+![Kapture 2020-07-02 at 16 59 04](https://user-images.githubusercontent.com/62678918/86408667-676b9f00-bc85-11ea-86c0-37b7b9f941c2.gif)
+
+Languages and technologies used: C# & CSV
+
 I created a personal bank account manager. This application allows the user to track both a savings and checking account total by performing transactions, such as withdrawals, deposits, and transfers. The application also saves any information inputted by the user in a CSV file.
 
 Details about the Application:
