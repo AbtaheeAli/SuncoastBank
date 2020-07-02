@@ -4,7 +4,7 @@
 
 Languages and technologies used: C# & CSV
 
-I created a personal bank account manager. This application allows the user to track both a savings and checking account total by performing transactions, such as withdrawals, deposits, and transfers. The application also saves any information inputted by the user in a CSV file.
+Created a personal bank account manager. This application allows the user to track both a savings and checking account total by performing transactions, such as withdrawals, deposits, and transfers. The application also saves any information inputted by the user in a CSV file.
 
 Details about the Application:
 
