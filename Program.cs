@@ -102,6 +102,8 @@ namespace FirstBankOfSuncoast
                     transactionsController.CalculateSavingsAccountBalance();
                     Console.WriteLine($"Your balance in your checking account is {transactionsController.checkingAccountValue}");
                     Console.WriteLine($"Your balance in your checking account is {transactionsController.savingsAccountValue}");
+                    Console.WriteLine("Press any key to back to the main menu.");
+                    Console.ReadKey();
                 }
 
                 if (choice == "D")
@@ -130,12 +132,16 @@ namespace FirstBankOfSuncoast
 
                         if (newAmount <= 0)
                         {
-                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                            Console.WriteLine("You have inputted an invalid amount.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
                         else
                         {
                             transactionsController.DepositChecking(newTransaction);
                             Console.WriteLine($"You have deposited {newAmount} into your checking account.");
+                            Console.WriteLine("Press any key to back to the main menu.");
+                            Console.ReadKey();
                             transactionsController.SaveAllTransactions();
                             transactionsController.CalculateCheckingAccountBalance();
                         }
@@ -158,12 +164,16 @@ namespace FirstBankOfSuncoast
 
                         if (newAmount <= 0)
                         {
-                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                            Console.WriteLine("You have inputted an invalid amount.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
                         else
                         {
                             transactionsController.DepositSavings(newTransaction);
                             Console.WriteLine($"You have deposited {newAmount} into your savings account.");
+                            Console.WriteLine("Press any key to back to the main menu.");
+                            Console.ReadKey();
                             transactionsController.SaveAllTransactions();
                             transactionsController.CalculateSavingsAccountBalance();
                         }
@@ -192,17 +202,23 @@ namespace FirstBankOfSuncoast
 
                         if (newAmount <= 0)
                         {
-                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                            Console.WriteLine("You have inputted an invalid amount.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
 
                         if (transactionsController.checkingAccountValue < newAmount)
                         {
-                            Console.WriteLine("The amount is more than what you have available in you checking account. Please try again.");
+                            Console.WriteLine("The amount is more than what you have available in you checking account.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
                         else
                         {
                             transactionsController.WithdrawChecking(newTransaction);
                             Console.WriteLine($"You have withdrew {newAmount} from your checking account.");
+                            Console.WriteLine("Press any key to back to the main menu");
+                            Console.ReadKey();
                             transactionsController.SaveAllTransactions();
                             transactionsController.CalculateCheckingAccountBalance();
                         }
@@ -224,17 +240,23 @@ namespace FirstBankOfSuncoast
 
                         if (newAmount <= 0)
                         {
-                            Console.WriteLine("You have inputted an invalid amount. Returning to main menu and please try again.");
+                            Console.WriteLine("You have inputted an invalid amount.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
 
                         if (transactionsController.savingsAccountValue < newAmount)
                         {
-                            Console.WriteLine("The amount,is more than what you have available in you savings account. Please try again.");
+                            Console.WriteLine("The amount,is more than what you have available in you savings account.");
+                            Console.WriteLine("Press any key to back to the main menu to try again.");
+                            Console.ReadKey();
                         }
                         else
                         {
                             transactionsController.WithdrawSavings(newTransaction);
                             Console.WriteLine($"You have withdrew {newAmount} from your savings account.");
+                            Console.WriteLine("Press any key to back to the main menu.");
+                            Console.ReadKey();
                             transactionsController.SaveAllTransactions();
                             transactionsController.CalculateSavingsAccountBalance();
                         }
