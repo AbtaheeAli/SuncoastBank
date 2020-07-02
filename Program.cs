@@ -9,6 +9,14 @@ namespace FirstBankOfSuncoast
 {
     class Program
     {
+        static void displayGreeting()
+        {
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("~~~~~~~~~ Welcome to Suncoast Bank! ~~~~~~~~~  ");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine();
+        }
+
         static int PromptForInteger(string prompt)
         {
             Console.Write(prompt);
@@ -55,6 +63,8 @@ namespace FirstBankOfSuncoast
 
         static void Main(string[] args)
         {
+            displayGreeting();
+
             var transactionsController = new TransactionsController();
             transactionsController.LoadAllTransactions();
 
